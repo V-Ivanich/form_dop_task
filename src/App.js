@@ -1,15 +1,15 @@
 import React from 'react'
-import MainForm from './components/mainForm'
+import MainCard from './components/mainCard'
 import { Route, Routes } from 'react-router-dom'
-import AddUser from './components/addUser'
+import MainForm from './components/mainForm'
 import './App.css'
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<MainForm />} />
-        <Route path='/register' element={<AddUser />} />
+        <Route path='/' element={<MainCard />} />
+        <Route path='/register' element={<MainForm />} />
       </Routes>
     </>
   )
