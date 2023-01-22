@@ -6,9 +6,10 @@ import TextField from './textField'
 
 const MainForm = () => {
   const [data, setData] = useState({
-    email: '',
-    password: '',
-    stayOn: false,
+    fname: '',
+    lname: '',
+    yearbirth: '',
+    portfolio: '',
   })
   const [errors, setErrors] = useState({})
 
@@ -20,19 +21,20 @@ const MainForm = () => {
   }
 
   const validateScheme = yup.object().shape({
-    password: yup
+    fname: yup
       .string()
-      .required('Пароль обязателен для заполнения')
-      .matches(
-        /^(?=.*[A-Z])/,
-        'Пароль должен содержать хотя бы одну заглавную букву',
-      )
-      .matches(/(?=.*[0-9])/, 'Пароль должен содержать хотя бы одну цифру')
-      .matches(
-        /(?=.*[!@#$%^&*])/,
-        'Пароль должен содержать один из специальных символов !@#$%^&*',
-      )
-      .matches(/(?=.{8,})/, 'Пароль должен состоять минимум из 8 символов'),
+      .required('Имя обязателено для заполнения')
+      .matches(/^(?=.*[A-Z][a-z])/, 'Имя должено содержать только буквы'),
+    // .matches(/(?=.*[0-9])/, 'Пароль должен содержать хотя бы одну цифру')
+    // .matches(
+    //   /(?=.*[!@#$%^&*])/,
+    //   'Пароль должен содержать один из специальных символов !@#$%^&*',
+    // )
+    // .matches(/(?=.{8,})/, 'Пароль должен состоять минимум из 8 символов'),
+    lname: yup
+      .string()
+      .required('Имя обязателено для заполнения')
+      .matches(/^(?=.*[A-Z][a-z])/, 'Имя должено содержать только буквы'),
     email: yup
       .string()
       .required('Электронная почта обязательна для заполнения')
@@ -90,7 +92,7 @@ const MainForm = () => {
   return (
     <div className='container d-flex justify-content-center mt-3'>
       <div className='w-50 shadow p-4'>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} style={{ fontSize: '1.5rem' }}>
           <div
             style={{
               backgroundColor: 'rgba(170, 245, 251, 0.931)',
@@ -102,16 +104,16 @@ const MainForm = () => {
           <TextField
             label='Имя :'
             name='fname'
-            value={data.email}
+            value={data.fname}
             onChange={handleChange}
-            error={errors.email}
+            error={errors.fname}
           />
           <TextField
             label='Фамилия :'
             name='lname'
-            value={data.email}
+            value={data.lname}
             onChange={handleChange}
-            error={errors.email}
+            error={errors.lname}
           />
           <TextField
             label='Год рождения :'
@@ -122,7 +124,6 @@ const MainForm = () => {
           />
           <TextField
             label='Портфолио :'
-            type='password'
             name='portfolio'
             value={data.password}
             onChange={handleChange}
@@ -131,7 +132,8 @@ const MainForm = () => {
           <Button
             type='submit'
             disabled={!isValid}
-            className='btn btn-primary px-5 mx-auto'>
+            className='btn btn-outline-danger px-4'
+            style={{ fontSize: '1.5rem' }}>
             Создать
           </Button>
         </Form>
