@@ -1,6 +1,6 @@
-import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import PropsTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const ModalWindow = ({ handleClose, show }) => {
   return (
@@ -12,9 +12,17 @@ const ModalWindow = ({ handleClose, show }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant='secondary' onClick={handleClose}>
+        <Link
+          to='/'
+          className='btn btn-outline-danger px-4'
+          onClick={handleClose}
+          style={{
+            fontSize: '1.5rem',
+            color: '#1f1f1f',
+            textDecoration: 'none',
+          }}>
           Close
-        </Button>
+        </Link>
       </Modal.Footer>
     </Modal>
   )

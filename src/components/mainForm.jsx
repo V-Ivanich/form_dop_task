@@ -4,16 +4,22 @@ import * as yup from 'yup'
 import TextField from './textField'
 import ModalWindow from './modalWindow'
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const MainForm = () => {
-  let userData = {}
-  const [data, setData] = useState({
-    fname: '',
-    lname: '',
-    yearbirth: '',
-    email: '',
-    url: '',
-  })
+  const userData = JSON.parse(localStorage.getItem('dataUser'))
+  const [data, setData] = useState(
+    userData
+      ? userData
+      : {
+          fname: '',
+          lname: '',
+          yearbirth: '',
+          email: '',
+          url: '',
+        },
+  )
+
   const [errors, setErrors] = useState({})
 
   const [show, setShow] = useState(false)
@@ -43,11 +49,8 @@ const MainForm = () => {
       ),
     yearbirth: yup
       .string()
-      .required('Дата рождения обязателена для заполнения(д-м-г)')
-      .matches(
-        /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
-        'Некорректная дата',
-      ),
+      .required('Год рождения обязателен для заполнения')
+      .matches(/^(19|20)[0-9]{2}$/, 'Некорректная дата'),
 
     lname: yup
       .string()
@@ -139,10 +142,16 @@ const MainForm = () => {
               onChange={handleChange}
               error={errors.url}
             />
+            <Link
+              to='/'
+              className='btn btn-outline-danger px-4 mx-2'
+              style={{ fontSize: '1.5rem' }}>
+              Назад
+            </Link>
             <Button
               type='button'
               disabled={!isValid}
-              className='btn btn-outline-danger px-4'
+              className='btn btn-info px-4'
               onClick={handleSubmit}
               style={{ fontSize: '1.5rem' }}>
               Создать

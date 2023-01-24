@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 import CardUser from './cardUser'
 
 const MainCard = () => {
-  const keysUsers = localStorage.getItem('userData')
-  console.log(keysUsers)
+  const keysUser = localStorage.getItem('dataUser')
+  const dataUser = JSON.parse(keysUser)
 
   return (
     <>
       <div className='container d-flex justify-content-center mt-3'>
-        {!keysUsers ? (
+        {!keysUser ? (
           <Card border='success' className='w-50 shadow p-2'>
             <Card.Header
               style={{ backgroundColor: 'rgba(170, 245, 251, 0.931)' }}>
@@ -28,7 +28,7 @@ const MainCard = () => {
             </Card.Body>
           </Card>
         ) : (
-          <CardUser />
+          <CardUser props={dataUser} />
         )}
       </div>
     </>
