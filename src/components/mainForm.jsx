@@ -104,7 +104,11 @@ const MainForm = () => {
                 backgroundColor: 'rgba(170, 245, 251, 0.931)',
                 borderRadius: '6px',
               }}>
-              <h1 className='p-3'>Создание карточки пользователя</h1>
+              <h1 className='p-3'>
+                {userData
+                  ? 'Редактирование карточки пользователя'
+                  : 'Создание карточки пользователя'}
+              </h1>
             </div>
 
             <TextField
@@ -142,19 +146,24 @@ const MainForm = () => {
               onChange={handleChange}
               error={errors.url}
             />
-            <Link
-              to='/'
-              className='btn btn-outline-danger px-4 mx-2'
-              style={{ fontSize: '1.5rem' }}>
-              Назад
-            </Link>
+            {userData ? (
+              <Link
+                to='/'
+                className='btn btn-outline-danger px-4 mx-2'
+                style={{ fontSize: '1.5rem' }}>
+                Назад
+              </Link>
+            ) : (
+              ''
+            )}
+
             <Button
               type='button'
               disabled={!isValid}
               className='btn btn-info px-4'
               onClick={handleSubmit}
               style={{ fontSize: '1.5rem' }}>
-              Создать
+              {userData ? 'Изменить' : 'Создать'}
             </Button>
           </Form>
         </div>
