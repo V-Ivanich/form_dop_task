@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal'
-import PropsTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const ModalWindow = ({ handleClose, show }) => {
@@ -28,9 +28,8 @@ const ModalWindow = ({ handleClose, show }) => {
   )
 }
 
-ModalWindow.propsTypes = {
-  handleClose: PropsTypes.func,
-  show: PropsTypes.bool,
-  dataUser: PropsTypes.object,
+ModalWindow.propTypes = {
+  handleClose: PropTypes.func,
+  show: PropTypes.bool,
 }
 export default ModalWindow
